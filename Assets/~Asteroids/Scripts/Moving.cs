@@ -48,6 +48,16 @@ namespace Asteroids
         {
             rigid.rotation -= angleOffset * rotationSpeed * Time.deltaTime;
         }
+
+        public void RotateLeft()
+        {
+            rigid.rotation -= rotationSpeed * Time.deltaTime;
+        }
+
+        public void RotateRight()
+        {
+            rigid.rotation += rotationSpeed * Time.deltaTime;
+        }
     }
 }
 

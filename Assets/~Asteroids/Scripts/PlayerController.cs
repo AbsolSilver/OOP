@@ -7,15 +7,36 @@ namespace Asteroids
     public class PlayerController : MonoBehaviour
     {
         public Moving movement;
+        public Shooting shoot;
 
-        // Use this for initialization
-        void Start()
-        {
-
-        }
+        #region Unity Functions
 
         // Update is called once per frame
         void Update()
+        {
+            Shoot();
+            Movement();
+        }
+
+        #endregion
+
+        #region Custom Functions
+
+        // Handling Shooting Functionality
+        void Shoot()
+        {
+            //If Space is pressed
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // Fire!
+                shoot.Fire(transform.up);
+            }
+
+        }
+
+
+        // Handles Moving Functionality
+        void Movement()
         {
             float inputV = Input.GetAxis("Vertical");
             float inputH = Input.GetAxis("Horizontal");
@@ -26,10 +47,11 @@ namespace Asteroids
                 movement.Accelerate(transform.up);
             }
 
-            // Check if horizontal axis (left or right arrow) is pressed
             // Rotate in correct direction
             movement.Rotate(inputH);
         }
+
+        #endregion
     }
 }
 
