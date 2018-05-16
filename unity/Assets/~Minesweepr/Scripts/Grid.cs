@@ -77,9 +77,103 @@ namespace Minesweeper2D
             }
             return count;
         }
+
+        public void FFuncover(int x, int y, bool[,] visited)
+        {
+            if (x >= 0 && y >= 0 && x < width && y < height)
+            {
+                if (visited[x, y])
+                {
+                    return;
+                }
+            }
+
+            tile = tiles[x, y];
+            adjacentMines = GetAdjacentMineCountAt(tile);
+            Tile.Reveal(adjacentMines);
+
+            if (adjacentMines > 0)
+            {
+                return;
+            }
+
+            visited[x, y] = true;
+
+            FFuncover(x - 1, y, visited);
+            FFuncover(x + 1, y, visited);
+            FFuncover(x, y - 1, visited);
+            FFuncover(x, y + 1, visited);
+        }
+
+        public void UncoverMines(int mineState)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    currentTile = tiles[x, y];
+                    
+                    if (currentTile == isMine)
+                    {
+                        adjacentMines = GetAdjacentMineCountAt(currentTile);
+                        currentTile.Reveal(adjacentMines, mineState);
+                    } 
+                }
+            }
+        }
+
+        bool NoMoreEmptyTiles()
+        {
+            int emptyTileCount = 0;
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    currentTile = tiles[x, y];
+
+                    if (!currentTile.isRevealed && !currentTile.isMine)
+                    {
+                        emptyTileCount = emptyTileCount + 1;
+                    }
+                }
+            }
+
+            return emptyTileCount == 0;
+        }
+
+        public void SelectTile(Tile selectedTile)
+        {
+            adjacentMines = GetAdjacentMineCountAt(selectedTile);
+            selectedTile.Reveal(adjacentMines);
+            if (selectedTile == isMine)
+            {
+                UncoverMines(0);
+            }
+            else if (adjacentMines == 0)
+            {
+                x = selectedTile.x;
+                y = selectedTile.y;
+                FFuncover(x, y, new bool[width, height]);
+
+                if (NoMoreEmptyTiles)
+                {
+                    UncoverMines(1);
+                }
+            }
+        }
+
         void Update()
         {
-            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Input.GetMouseButtonDown(0))
+            {
+               Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            }
+
+
+
+            /*
+            
             hit = Physics2D.Raycast(mouseRay.origin, mouseRay.direction);
             if (hit.collider != null)
             {
@@ -90,6 +184,7 @@ namespace Minesweeper2D
                     hitTile.Reveal(adjacentMines);
                 }
             }
+            */
         }
     }
 }
