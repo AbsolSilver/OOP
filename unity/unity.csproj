@@ -94,8 +94,8 @@
     <Compile Include="Assets\~Asteroids\Scripts\Shooting.cs" />
     <Compile Include="Assets\~Breakout\Scripts\Ball.cs" />
     <Compile Include="Assets\~Breakout\Scripts\Paddle.cs" />
-    <Compile Include="Assets\~Minesweepr\Scripts\Grid.cs" />
-    <Compile Include="Assets\~Minesweepr\Scripts\Tile.cs" />
+    <Compile Include="Assets\~Minesweeper\Scripts\Grid.cs" />
+    <Compile Include="Assets\~Minesweeper\Scripts\Tile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
