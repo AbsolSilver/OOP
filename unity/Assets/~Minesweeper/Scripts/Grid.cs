@@ -92,7 +92,8 @@ namespace Minesweeper
 
         void FFuncover(int x, int y, bool[,] visited)
         {
-            if (x >= 0 && y >= 0 && x < width && y < height)
+            if (x >= 0 && y >= 0 && 
+                x < width && y < height)
             {
                 if (visited[x, y])
                 {
@@ -158,7 +159,19 @@ namespace Minesweeper
 
             if (selected.isMine)
             {
+                UncoverMines();
+            }
+            else if (adjacentMines == 0)
+            {
+                int x = selected.x;
+                int y = selected.y;
 
+                FFuncover(x, y, new bool[width, height]);
+            }
+
+            if (NoMoreEmptyTiles())
+            {
+                UncoverMines(1);
             }
         }
 
@@ -166,7 +179,17 @@ namespace Minesweeper
         {
             if (Input.GetMouseButtonDown(0))
             {
-                SelectATile();
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+                if (hit.collider != null)
+                {
+                    Tile hitTile = hit.collider.GetComponent<Tile>();
+                    if (hitTile != null)
+                    {
+                        SelectTile(hitTile);
+                    }
+                }
             }
         }
 
