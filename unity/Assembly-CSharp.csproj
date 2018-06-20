@@ -46,7 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\!Globals\Scripts\KeepWithinScreen.cs" />
+     <Compile Include="Assets\PaddleScript.cs" />
+     <Compile Include="Assets\~AHundredBalls\Scripts\SpawnerScript.cs" />
      <Compile Include="Assets\~Asteroids\Scripts\AsteroidSpawner.cs" />
      <Compile Include="Assets\~Asteroids\Scripts\Bullet.cs" />
      <Compile Include="Assets\~Asteroids\Scripts\DestroyOnLifetime.cs" />
@@ -55,7 +56,12 @@
      <Compile Include="Assets\~Asteroids\Scripts\ScreenWrap.cs" />
      <Compile Include="Assets\~Asteroids\Scripts\Shooting.cs" />
      <Compile Include="Assets\~Breakout\Scripts\Ball.cs" />
+     <Compile Include="Assets\~Breakout\Scripts\Brick.cs" />
+     <Compile Include="Assets\~Breakout\Scripts\DeathZone.cs" />
+     <Compile Include="Assets\~Breakout\Scripts\GameManager.cs" />
      <Compile Include="Assets\~Breakout\Scripts\Paddle.cs" />
+     <Compile Include="Assets\~Minesweeper\Scripts\Elements.cs" />
+     <Compile Include="Assets\~Minesweeper\Scripts\Grid.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -2,33 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Breakout
+public class Ball : MonoBehaviour
 {
-    public class Ball : MonoBehaviour
+
+    public float ballInitialVelocity = 600f;
+
+    private Rigidbody rigid;
+
+    private bool ballInPlay;
+
+    // Use this for initialization
+    void Start()
     {
-        public float speed = 5f;
+        rigid = GetComponent<Rigidbody>();
+    }
 
-        private Vector3 velocity;
-
-
-        public void Fire(Vector3 direction)
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1") && ballInPlay == false)
         {
-            velocity = direction * speed;
-        }
-
-        void OnCollisionEnter2D(Collision2D other)
-        {
-            ContactPoint2D contact = other.contacts[0];
-            Vector3 reflect = Vector3.Reflect(velocity, contact.normal);
-            velocity = reflect.normalized * velocity.magnitude;
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {
-            transform.position += velocity * Time.deltaTime;
+            transform.parent = null;
+            ballInPlay = true;
+            rigid.isKinematic = false;
+            rigid.AddForce(new Vector3(ballInitialVelocity, ballInitialVelocity, 0));
         }
     }
 }
-
-
